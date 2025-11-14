@@ -4,6 +4,7 @@ os.environ['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
 import sys
 import json
 
+
 import bittensor as bt
 import pandas as pd
 from rdkit import Chem
@@ -20,6 +21,7 @@ from nova_ph2.PSICHIC.wrapper import PsichicWrapper
 from random_sampler import run_sampler
 
 DB_PATH = str(Path(nova_ph2.__file__).resolve().parent / "combinatorial_db" / "molecules.sqlite")
+
 
 def get_config(input_file: os.path = os.path.join(BASE_DIR, "input.json")):
     """
@@ -148,6 +150,8 @@ def iterative_sampling_loop(
         bt.logging.info(f"[Miner] Wrote {config['num_molecules']} top molecules to {output_path}")
         bt.logging.info(f"[Miner] Average score: {top_pool['score'].mean()}")
 
+
+
 def calculate_final_scores(score_dict: dict, 
         sampler_data: dict, 
         config: dict, 
@@ -206,6 +210,7 @@ def calculate_final_scores(score_dict: dict,
             json.dump(all_scores, f, ensure_ascii=False, indent=2)
 
     return batch_scores
+            
 
 def main(config: dict):
     iterative_sampling_loop(
